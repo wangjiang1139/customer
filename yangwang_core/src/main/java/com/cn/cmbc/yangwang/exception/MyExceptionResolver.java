@@ -26,6 +26,7 @@ public class MyExceptionResolver implements HandlerExceptionResolver{
 
     private static final Logger logger = LoggerFactory.getLogger(MyExceptionResolver.class);
 
+    @Override
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception exception) {
 
         MyException myException = null;

@@ -27,6 +27,7 @@ public class MyrInterceptor implements HandlerInterceptor{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MyrInterceptor.class);
     //拦截之前做的事
+    @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         RequestWrapper myRequestWrapper = new RequestWrapper(request);
         HashMap map = JSON.parseObject(myRequestWrapper.getBody(), HashMap.class);
