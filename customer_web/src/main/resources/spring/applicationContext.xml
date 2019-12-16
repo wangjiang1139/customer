@@ -18,4 +18,5 @@
     <import resource="classpath:spring/applicationContext-service.xml"/>
     <import resource="classpath:spring/applicationContext-dao.xml"/>
     <import resource="classpath:spring/applicationContext-exception.xml"/>
+    <import resource="classpath:spring/applicationContext-rs-server.xml"/>
 </beans>

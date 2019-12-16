@@ -49,7 +49,7 @@ public class AnnotationHandler implements InitializingBean ,ApplicationContextAw
             //扫描com.cn.cmbc.customer.service.impl下的有@ExistOutService注解的类
             Reflections reflections = new Reflections(Contexts.CONTEXTSCAN);
             Set<Class<?>> set = reflections.getTypesAnnotatedWith(ExistOutService.class);
-            if(urlMap.size() == 0 && set != null && set.size()>0){
+            if(urlMap.size() != 0 && set != null && set.size()>0 && urlMap.size() != set.size()){
                 LOGGER.error("请求外部服务配置文件未配齐");
                 throw new MyException("A99099009","请求外部服务配置文件未配齐");
             }else {

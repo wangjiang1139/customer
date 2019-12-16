@@ -34,7 +34,7 @@
     <!--配置拦截器-->
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/file/*"/>
+            <mvc:mapping path="/*/*"/>
             <bean class="com.cn.cmbc.yangwang.interceptor.MyrInterceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>

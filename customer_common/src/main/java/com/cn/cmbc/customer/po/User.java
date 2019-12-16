@@ -1,5 +1,8 @@
 package com.cn.cmbc.customer.po;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "result")
 public class User {
     private Integer id;
 
