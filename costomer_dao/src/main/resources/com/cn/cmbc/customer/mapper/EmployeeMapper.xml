@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cn.cmbc.customer.mapper.EmployeeMapper" >
+  <resultMap id="BaseResultMap" type="com.cn.cmbc.customer.po.Employee" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="CHAR" />
+    <result column="famous_race" property="famousRace" jdbcType="VARCHAR" />
+    <result column="type_of_work" property="typeOfWork" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
+    <result column="political_outlook" property="politicalOutlook" jdbcType="VARCHAR" />
+    <result column="id_number" property="idNumber" jdbcType="VARCHAR" />
+    <result column="began_work" property="beganWork" jdbcType="TIMESTAMP" />
+    <result column="in_company_time" property="inCompanyTime" jdbcType="TIMESTAMP" />
+    <result column="education" property="education" jdbcType="VARCHAR" />
+    <result column="graduate_school" property="graduateSchool" jdbcType="VARCHAR" />
+    <result column="graduate" property="graduate" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="home_address" property="homeAddress" jdbcType="VARCHAR" />
+    <result column="spouse" property="spouse" jdbcType="VARCHAR" />
+    <result column="depart_id" property="departId" jdbcType="VARCHAR" />
+    <result column="contact_number" property="contactNumber" jdbcType="VARCHAR" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modify_by" property="modifyBy" jdbcType="VARCHAR" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="back_01" property="back01" jdbcType="VARCHAR" />
+    <result column="back_02" property="back02" jdbcType="VARCHAR" />
+    <result column="back_03" property="back03" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, sex, famous_race, type_of_work, age, birthday, political_outlook, id_number, 
+    began_work, in_company_time, education, graduate_school, graduate, title, home_address, 
+    spouse, depart_id, contact_number, create_by, create_time, modify_by, modify_time, 
+    back_01, back_02, back_03
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cn.cmbc.customer.po.EmployeeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from employee
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from employee
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from employee
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cn.cmbc.customer.po.EmployeeExample" >
+    delete from employee
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cn.cmbc.customer.po.Employee" >
+    insert into employee (id, name, sex, famous_race, 
+      type_of_work, age, birthday, 
+      political_outlook, id_number, began_work, 
+      in_company_time, education, graduate_school, 
+      graduate, title, home_address, 
+      spouse, depart_id, contact_number, 
+      create_by, create_time, modify_by, 
+      modify_time, back_01, back_02, 
+      back_03)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{famousRace,jdbcType=VARCHAR}, 
+      #{typeOfWork,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{birthday,jdbcType=TIMESTAMP}, 
+      #{politicalOutlook,jdbcType=VARCHAR}, #{idNumber,jdbcType=VARCHAR}, #{beganWork,jdbcType=TIMESTAMP}, 
+      #{inCompanyTime,jdbcType=TIMESTAMP}, #{education,jdbcType=VARCHAR}, #{graduateSchool,jdbcType=VARCHAR}, 
+      #{graduate,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{homeAddress,jdbcType=VARCHAR}, 
+      #{spouse,jdbcType=VARCHAR}, #{departId,jdbcType=VARCHAR}, #{contactNumber,jdbcType=VARCHAR}, 
+      #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modifyBy,jdbcType=VARCHAR}, 
+      #{modifyTime,jdbcType=TIMESTAMP}, #{back01,jdbcType=VARCHAR}, #{back02,jdbcType=VARCHAR}, 
+      #{back03,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cn.cmbc.customer.po.Employee" >
+    insert into employee
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="famousRace != null" >
+        famous_race,
+      </if>
+      <if test="typeOfWork != null" >
+        type_of_work,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="politicalOutlook != null" >
+        political_outlook,
+      </if>
+      <if test="idNumber != null" >
+        id_number,
+      </if>
+      <if test="beganWork != null" >
+        began_work,
+      </if>
+      <if test="inCompanyTime != null" >
+        in_company_time,
+      </if>
+      <if test="education != null" >
+        education,
+      </if>
+      <if test="graduateSchool != null" >
+        graduate_school,
+      </if>
+      <if test="graduate != null" >
+        graduate,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="homeAddress != null" >
+        home_address,
+      </if>
+      <if test="spouse != null" >
+        spouse,
+      </if>
+      <if test="departId != null" >
+        depart_id,
+      </if>
+      <if test="contactNumber != null" >
+        contact_number,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifyBy != null" >
+        modify_by,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="back01 != null" >
+        back_01,
+      </if>
+      <if test="back02 != null" >
+        back_02,
+      </if>
+      <if test="back03 != null" >
+        back_03,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="famousRace != null" >
+        #{famousRace,jdbcType=VARCHAR},
+      </if>
+      <if test="typeOfWork != null" >
+        #{typeOfWork,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="politicalOutlook != null" >
+        #{politicalOutlook,jdbcType=VARCHAR},
+      </if>
+      <if test="idNumber != null" >
+        #{idNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="beganWork != null" >
+        #{beganWork,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inCompanyTime != null" >
+        #{inCompanyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="education != null" >
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="graduateSchool != null" >
+        #{graduateSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="graduate != null" >
+        #{graduate,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddress != null" >
+        #{homeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="spouse != null" >
+        #{spouse,jdbcType=VARCHAR},
+      </if>
+      <if test="departId != null" >
+        #{departId,jdbcType=VARCHAR},
+      </if>
+      <if test="contactNumber != null" >
+        #{contactNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null" >
+        #{modifyBy,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="back01 != null" >
+        #{back01,jdbcType=VARCHAR},
+      </if>
+      <if test="back02 != null" >
+        #{back02,jdbcType=VARCHAR},
+      </if>
+      <if test="back03 != null" >
+        #{back03,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cn.cmbc.customer.po.EmployeeExample" resultType="java.lang.Integer" >
+    select count(*) from employee
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update employee
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=CHAR},
+      </if>
+      <if test="record.famousRace != null" >
+        famous_race = #{record.famousRace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeOfWork != null" >
+        type_of_work = #{record.typeOfWork,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null" >
+        age = #{record.age,jdbcType=INTEGER},
+      </if>
+      <if test="record.birthday != null" >
+        birthday = #{record.birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.politicalOutlook != null" >
+        political_outlook = #{record.politicalOutlook,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idNumber != null" >
+        id_number = #{record.idNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beganWork != null" >
+        began_work = #{record.beganWork,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.inCompanyTime != null" >
+        in_company_time = #{record.inCompanyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.education != null" >
+        education = #{record.education,jdbcType=VARCHAR},
+      </if>
+      <if test="record.graduateSchool != null" >
+        graduate_school = #{record.graduateSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="record.graduate != null" >
+        graduate = #{record.graduate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homeAddress != null" >
+        home_address = #{record.homeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spouse != null" >
+        spouse = #{record.spouse,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departId != null" >
+        depart_id = #{record.departId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contactNumber != null" >
+        contact_number = #{record.contactNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createBy != null" >
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyBy != null" >
+        modify_by = #{record.modifyBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifyTime != null" >
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.back01 != null" >
+        back_01 = #{record.back01,jdbcType=VARCHAR},
+      </if>
+      <if test="record.back02 != null" >
+        back_02 = #{record.back02,jdbcType=VARCHAR},
+      </if>
+      <if test="record.back03 != null" >
+        back_03 = #{record.back03,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update employee
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=CHAR},
+      famous_race = #{record.famousRace,jdbcType=VARCHAR},
+      type_of_work = #{record.typeOfWork,jdbcType=VARCHAR},
+      age = #{record.age,jdbcType=INTEGER},
+      birthday = #{record.birthday,jdbcType=TIMESTAMP},
+      political_outlook = #{record.politicalOutlook,jdbcType=VARCHAR},
+      id_number = #{record.idNumber,jdbcType=VARCHAR},
+      began_work = #{record.beganWork,jdbcType=TIMESTAMP},
+      in_company_time = #{record.inCompanyTime,jdbcType=TIMESTAMP},
+      education = #{record.education,jdbcType=VARCHAR},
+      graduate_school = #{record.graduateSchool,jdbcType=VARCHAR},
+      graduate = #{record.graduate,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      home_address = #{record.homeAddress,jdbcType=VARCHAR},
+      spouse = #{record.spouse,jdbcType=VARCHAR},
+      depart_id = #{record.departId,jdbcType=VARCHAR},
+      contact_number = #{record.contactNumber,jdbcType=VARCHAR},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      modify_by = #{record.modifyBy,jdbcType=VARCHAR},
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      back_01 = #{record.back01,jdbcType=VARCHAR},
+      back_02 = #{record.back02,jdbcType=VARCHAR},
+      back_03 = #{record.back03,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cn.cmbc.customer.po.Employee" >
+    update employee
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="famousRace != null" >
+        famous_race = #{famousRace,jdbcType=VARCHAR},
+      </if>
+      <if test="typeOfWork != null" >
+        type_of_work = #{typeOfWork,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="politicalOutlook != null" >
+        political_outlook = #{politicalOutlook,jdbcType=VARCHAR},
+      </if>
+      <if test="idNumber != null" >
+        id_number = #{idNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="beganWork != null" >
+        began_work = #{beganWork,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inCompanyTime != null" >
+        in_company_time = #{inCompanyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="education != null" >
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="graduateSchool != null" >
+        graduate_school = #{graduateSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="graduate != null" >
+        graduate = #{graduate,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="homeAddress != null" >
+        home_address = #{homeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="spouse != null" >
+        spouse = #{spouse,jdbcType=VARCHAR},
+      </if>
+      <if test="departId != null" >
+        depart_id = #{departId,jdbcType=VARCHAR},
+      </if>
+      <if test="contactNumber != null" >
+        contact_number = #{contactNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyBy != null" >
+        modify_by = #{modifyBy,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="back01 != null" >
+        back_01 = #{back01,jdbcType=VARCHAR},
+      </if>
+      <if test="back02 != null" >
+        back_02 = #{back02,jdbcType=VARCHAR},
+      </if>
+      <if test="back03 != null" >
+        back_03 = #{back03,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cn.cmbc.customer.po.Employee" >
+    update employee
+    set name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=CHAR},
+      famous_race = #{famousRace,jdbcType=VARCHAR},
+      type_of_work = #{typeOfWork,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      birthday = #{birthday,jdbcType=TIMESTAMP},
+      political_outlook = #{politicalOutlook,jdbcType=VARCHAR},
+      id_number = #{idNumber,jdbcType=VARCHAR},
+      began_work = #{beganWork,jdbcType=TIMESTAMP},
+      in_company_time = #{inCompanyTime,jdbcType=TIMESTAMP},
+      education = #{education,jdbcType=VARCHAR},
+      graduate_school = #{graduateSchool,jdbcType=VARCHAR},
+      graduate = #{graduate,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      home_address = #{homeAddress,jdbcType=VARCHAR},
+      spouse = #{spouse,jdbcType=VARCHAR},
+      depart_id = #{departId,jdbcType=VARCHAR},
+      contact_number = #{contactNumber,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_by = #{modifyBy,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      back_01 = #{back01,jdbcType=VARCHAR},
+      back_02 = #{back02,jdbcType=VARCHAR},
+      back_03 = #{back03,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
